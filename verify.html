@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPRA Mastery — Verify Certificate</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .verify-container {
+            max-width: 600px;
+            margin: 3rem auto;
+            text-align: center;
+        }
+        
+        .verify-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            padding: 3rem 2rem;
+        }
+        
+        .verify-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .verify-title {
+            font-size: 1.5rem;
+            color: var(--gray-800);
+            margin-bottom: 1.5rem;
+        }
+        
+        .verify-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .verify-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 58, 92, 0.1);
+        }
+        
+        .verify-result {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            display: none;
+        }
+        
+        .verify-valid {
+            background: #d1fae5;
+            border: 1px solid var(--success);
+            display: block;
+        }
+        
+        .verify-invalid {
+            background: #fee2e2;
+            border: 1px solid var(--danger);
+            display: block;
+        }
+        
+        .verify-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-800);
+        }
+        
+        .verify-date {
+            color: var(--gray-600);
+            margin-top: 0.5rem;
+        }
+        
+        .verify-score {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 0.75rem;
+        }
+        
+        .verify-back {
+            display: inline-block;
+            margin-top: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .verify-back:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        
+        <header class="header">
+            <div class="logo">
+                <h1>PPRA MASTERY</h1>
+                <span class="subtitle">Public Procurement Act, 2021 — Act No. 24 of 2021</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Dashboard</a>
+                <a href="act.html" class="nav-link">Act Viewer</a>
+                <a href="test.html" class="nav-link">Tests</a>
+                <a href="certificate.html" class="nav-link">Certificate</a>
+                <a href="about.html" class="nav-link">About</a>
+            </nav>
+        </header>
+
+        <main class="main">
+            <div class="verify-container">
+                
+                <div class="verify-card">
+                    <div class="verify-icon">🔍</div>
+                    <h2 class="verify-title">Verify a PPRA Mastery Certificate</h2>
+                    <p style="color: var(--gray-600); margin-bottom: 1.5rem;">
+                        Enter the credential ID from a PPRA Mastery certificate to verify its authenticity.
+                    </p>
+                    
+                    <input type="text" id="credentialInput" class="verify-input" placeholder="e.g., PPRA-20260425-7F3A2B1C" maxlength="40">
+                    <br>
+                    <button id="verifyBtn" class="btn btn-large">Verify Certificate</button>
+                    <br>
+                    <small style="color: var(--gray-500);">You can also use a URL like: /verify.html?id=PPRA-XXXX</small>
+                    
+                    <div id="verifyResult" class="verify-result"></div>
+                </div>
+                
+                <a href="index.html" class="verify-back">← Back to Dashboard</a>
+                
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>Built for procurement professionals in Botswana</p>
+            <p>
+                <a href="about.html" class="footer-link">About</a> · 
+                <a href="https://ppra.co.bw" target="_blank" class="footer-link">Official PPRA Website</a> · 
+                <a href="#" class="footer-link">Act No. 24 of 2021</a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="js/verify.js"></script>
+</body>
+</html>
