@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPRA Mastery — Test</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Anime.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .test-header {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .test-header h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .test-header p {
+            color: var(--gray-600);
+        }
+        
+        .test-progress {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .progress-text {
+            font-weight: 600;
+            color: var(--gray-700);
+            white-space: nowrap;
+        }
+        
+        .question-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(15px);
+        }
+        
+        .question-number {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem 1.25rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .option-item:hover {
+            background: var(--gray-100);
+        }
+        
+        .option-item.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .option-item input[type="radio"] {
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+            accent-color: var(--primary);
+        }
+        
+        .option-item label {
+            flex: 1;
+            cursor: pointer;
+            line-height: 1.5;
+        }
+        
+        .test-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            opacity: 0;
+        }
+        
+        .btn-large {
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+        }
+        
+        .results-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 2rem;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .score-display {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+        
+        .score-status {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .status-mastered {
+            color: var(--success);
+        }
+        
+        .status-failed {
+            color: var(--warning);
+        }
+        
+        .breakdown-list {
+            text-align: left;
+            margin: 1.5rem 0;
+        }
+        
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .correct { color: var(--success); font-weight: 600; }
+        .incorrect { color: var(--danger); font-weight: 600; }
+        
+        .explanation-box {
+            background: var(--gray-100);
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius);
+            margin: 1rem 0;
+            text-align: left;
+        }
+        
+        .part-selector {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .part-selector select {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius);
+            margin: 0 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- ===== HEADER ===== -->
+        <header class="header">
+            <div class="logo">
+                <h1>PPRA MASTERY</h1>
+                <span class="subtitle">Public Procurement Act, 2021 — Act No. 24 of 2021</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Dashboard</a>
+                <a href="act.html" class="nav-link">Act Viewer</a>
+                <a href="test.html" class="nav-link active">Tests</a>
+                <a href="certificate.html" class="nav-link">Certificate</a>
+                <a href="about.html" class="nav-link">About</a>
+            </nav>
+        </header>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="main">
+            <div class="test-container">
+                
+                <!-- Part Selector (shown when no test active) -->
+                <div id="partSelector" class="part-selector">
+                    <h3>Select a Part to Test</h3>
+                    <p style="margin: 1rem 0; color: var(--gray-600);">Choose which part of the Act you want to be tested on.</p>
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                        <select id="partSelect">
+                            <option value="1">Part 1: Preliminary (ss 1-5)</option>
+                            <option value="2">Part 2: Authority and Board (ss 6-19)</option>
+                            <option value="3">Part 3: Board Meetings (ss 20-25)</option>
+                            <option value="4">Part 4: CEO and Employees (ss 26-32)</option>
+                            <option value="5">Part 5: Financial Provisions (ss 33-38)</option>
+                            <option value="6">Part 6: Procuring Entities (ss 39-44)</option>
+                            <option value="7">Part 7: Oversight Units (ss 45-51)</option>
+                            <option value="8">Part 8: Methods of Procurement (ss 52-55)</option>
+                            <option value="9">Part 9: Bidding Packages (ss 56-62)</option>
+                            <option value="10">Part 10: Evaluation (ss 63-71)</option>
+                            <option value="11">Part 11: Preference (ss 72-81)</option>
+                            <option value="12">Part 12: Accountability (ss 82-90)</option>
+                            <option value="13">Part 13: Contractors (ss 91-103)</option>
+                            <option value="14">Part 14: Complaints (ss 104-113)</option>
+                            <option value="15">Part 15: Tribunal (ss 114-138)</option>
+                            <option value="16">Part 16: General (ss 139-152)</option>
+                        </select>
+                        <button id="startTestBtn" class="btn btn-large">Start Test</button>
+                    </div>
+                </div>
+                
+                <!-- Active Test Area (hidden initially) -->
+                <div id="activeTest" style="display: none;">
+                    <div class="test-header" id="testHeader">
+                        <h2 id="testPartTitle">Part I: Preliminary</h2>
+                        <p id="testPartSections">Sections 1-5</p>
+                        <div class="test-progress">
+                            <div class="progress-bar-container" style="flex: 1;">
+                                <div id="testProgressBar" class="progress-bar" style="width: 0%;">0%</div>
+                            </div>
+                            <span class="progress-text" id="questionCounter">Question 1 of 10</span>
+                        </div>
+                    </div>
+                    
+                    <div id="questionCard" class="question-card">
+                        <!-- Questions loaded here -->
+                    </div>
+                    
+                    <div class="test-actions" id="testActions">
+                        <button id="prevQuestionBtn" class="btn btn-outline btn-large" disabled>◀ Previous</button>
+                        <button id="nextQuestionBtn" class="btn btn-large">Next ▶</button>
+                        <button id="submitTestBtn" class="btn btn-large" style="display: none;">Submit Test</button>
+                    </div>
+                </div>
+                
+                <!-- Results Area (shown after submission) -->
+                <div id="resultsArea" style="display: none;">
+                    <div class="results-card" id="resultsCard">
+                        <h2>Test Complete!</h2>
+                        <div class="score-display" id="finalScore">0%</div>
+                        <div class="score-status" id="scoreStatus"></div>
+                        
+                        <div class="breakdown-list" id="breakdownList">
+                        </div>
+                        
+                        <div id="reviewSection">
+                        </div>
+                        
+                        <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                            <a href="index.html" class="btn btn-outline">Back to Dashboard</a>
+                            <button id="retakeTestBtn" class="btn">Retake Test</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </main>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="footer">
+            <p>Built for procurement professionals in Botswana</p>
+            <p>
+                <a href="about.html" class="footer-link">About</a> · 
+                <a href="https://ppra.co.bw" target="_blank" class="footer-link">Official PPRA Website</a> · 
+                <a href="#" class="footer-link">Act No. 24 of 2021</a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="js/questions.js"></script>
+    <script src="js/quiz.js"></script>
+</body>
+</html>

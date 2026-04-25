@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPRA Mastery — Act Viewer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Act Viewer specific styles */
+        .act-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .act-sidebar {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 1rem;
+        }
+        
+        .search-box {
+            margin-bottom: 1.5rem;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 58, 92, 0.1);
+        }
+        
+        .search-results {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 0.5rem;
+        }
+        
+        .search-result-item {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--gray-200);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .search-result-item:hover {
+            background: var(--gray-100);
+        }
+        
+        .search-result-title {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+        
+        .search-result-preview {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            margin-top: 0.25rem;
+        }
+        
+        .toc-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--gray-800);
+        }
+        
+        .toc-list {
+            list-style: none;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .toc-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        
+        .toc-link {
+            text-decoration: none;
+            color: var(--gray-700);
+            display: block;
+            transition: color 0.2s;
+            font-size: 0.9rem;
+        }
+        
+        .toc-link:hover {
+            color: var(--primary);
+        }
+        
+        .toc-link.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .toc-part {
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+        
+        .toc-sections {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            margin-left: 0.5rem;
+        }
+        
+        .act-content {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 2rem;
+            min-height: 800px;
+        }
+        
+        .act-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gray-200);
+        }
+        
+        .act-header h2 {
+            color: var(--primary);
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .act-header .official-citation {
+            color: var(--gray-600);
+            font-style: italic;
+        }
+        
+        .section-nav {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+        }
+        
+        .section-content {
+            line-height: 1.8;
+        }
+        
+        .section-content h3 {
+            color: var(--primary);
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.3rem;
+        }
+        
+        .section-content h4 {
+            color: var(--gray-800);
+            margin: 1.25rem 0 0.75rem 0;
+            font-size: 1.1rem;
+        }
+        
+        .section-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .section-content .subsection {
+            margin-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .highlight {
+            background: #fef08a;
+            padding: 0.125rem 0.25rem;
+            border-radius: 4px;
+        }
+        
+        .no-results {
+            text-align: center;
+            color: var(--gray-500);
+            padding: 1rem;
+        }
+        
+        .test-prompt {
+            background: var(--gray-100);
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius);
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .test-prompt-text {
+            color: var(--gray-700);
+        }
+        
+        @media (max-width: 768px) {
+            .act-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .act-sidebar {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- ===== HEADER / NAVIGATION ===== -->
+        <header class="header">
+            <div class="logo">
+                <h1>PPRA MASTERY</h1>
+                <span class="subtitle">Public Procurement Act, 2021 — Act No. 24 of 2021</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Dashboard</a>
+                <a href="act.html" class="nav-link active">Act Viewer</a>
+                <a href="test.html" class="nav-link">Tests</a>
+                <a href="certificate.html" class="nav-link">Certificate</a>
+                <a href="about.html" class="nav-link">About</a>
+            </nav>
+        </header>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="main">
+            
+            <div class="act-container">
+                
+                <!-- ===== SIDEBAR: SEARCH + TABLE OF CONTENTS ===== -->
+                <aside class="act-sidebar">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" class="search-input" placeholder="Search the Act... (e.g., 'emergency', 'cooling-off', 'tribunal')">
+                        <div id="searchResults" class="search-results"></div>
+                    </div>
+                    
+                    <h3 class="toc-title">📑 TABLE OF CONTENTS</h3>
+                    <ul class="toc-list" id="tocList">
+                        <!-- Populated by JavaScript -->
+                    </ul>
+                </aside>
+                
+                <!-- ===== MAIN ACT CONTENT ===== -->
+                <article class="act-content" id="actContent">
+                    <div class="act-header">
+                        <h2>Public Procurement Act, 2021</h2>
+                        <p class="official-citation">Act No. 24 of 2021 — Date of Commencement: 14th April, 2021</p>
+                    </div>
+                    
+                    <div id="currentPartDisplay">
+                        <!-- Current part content will be loaded here -->
+                    </div>
+                    
+                    <div class="section-nav">
+                        <button id="prevPartBtn" class="btn btn-outline">◀ Previous Part</button>
+                        <span id="partIndicator">Part I of XVI</span>
+                        <button id="nextPartBtn" class="btn">Next Part ▶</button>
+                    </div>
+                    
+                    <div id="testPrompt" class="test-prompt">
+                        <span class="test-prompt-text">📝 Ready to test your knowledge on this Part?</span>
+                        <a href="test.html" id="takeTestBtn" class="btn">Take Test</a>
+                    </div>
+                </article>
+            </div>
+            
+        </main>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="footer">
+            <p>Built for procurement professionals in Botswana</p>
+            <p>
+                <a href="about.html" class="footer-link">About</a> · 
+                <a href="https://ppra.co.bw" target="_blank" class="footer-link">Official PPRA Website</a> · 
+                <a href="#" class="footer-link">Act No. 24 of 2021</a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="js/act.js"></script>
+</body>
+</html>

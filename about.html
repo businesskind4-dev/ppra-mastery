@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPRA Mastery — About</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Anime.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+        .about-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .about-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 2rem 2.5rem;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+        }
+        
+        .about-card h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .about-card p {
+            color: var(--gray-700);
+            line-height: 1.8;
+            margin-bottom: 0.75rem;
+        }
+        
+        .mission-card {
+            border-left: 4px solid var(--accent);
+        }
+        
+        .creator-card {
+            border-left: 4px solid var(--primary);
+        }
+        
+        .creator-name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 0.25rem;
+        }
+        
+        .creator-title {
+            font-size: 1rem;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .creator-quote {
+            background: var(--gray-100);
+            padding: 1.5rem 2rem;
+            border-radius: var(--radius);
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--gray-700);
+            line-height: 1.8;
+            position: relative;
+        }
+        
+        .creator-quote::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.2;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            font-family: Georgia, serif;
+        }
+        
+        .creator-quote::after {
+            content: '"';
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.2;
+            position: absolute;
+            bottom: -30px;
+            right: 10px;
+            font-family: Georgia, serif;
+        }
+        
+        .features-card {
+            border-left: 4px solid var(--success);
+        }
+        
+        .feature-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .feature-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .feature-text strong {
+            color: var(--gray-800);
+        }
+        
+        .feature-text span {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+        
+        .disclaimer-card {
+            border-left: 4px solid var(--warning);
+            background: #fffbeb;
+        }
+        
+        .disclaimer-card p {
+            color: #92400e;
+            font-size: 0.9rem;
+        }
+        
+        .connect-card {
+            text-align: center;
+            border-left: 4px solid var(--primary-light);
+        }
+        
+        .linkedin-btn {
+            display: inline-block;
+            background: #0a66c2;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin-top: 1rem;
+        }
+        
+        .linkedin-btn:hover {
+            background: #084e96;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Underline draw animation for name */
+        .name-underline {
+            display: block;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            margin-top: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- ===== HEADER ===== -->
+        <header class="header">
+            <div class="logo">
+                <h1>PPRA MASTERY</h1>
+                <span class="subtitle">Public Procurement Act, 2021 — Act No. 24 of 2021</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Dashboard</a>
+                <a href="act.html" class="nav-link">Act Viewer</a>
+                <a href="test.html" class="nav-link">Tests</a>
+                <a href="certificate.html" class="nav-link">Certificate</a>
+                <a href="about.html" class="nav-link active">About</a>
+            </nav>
+        </header>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <main class="main">
+            <div class="about-container">
+                
+                <!-- Mission Card -->
+                <div class="about-card mission-card" id="missionCard">
+                    <h2>Our Mission</h2>
+                    <p>
+                        PPRA Mastery exists to empower procurement professionals across Botswana with accessible, 
+                        rigorous digital tools for mastering the Public Procurement Act. We believe that a well-trained 
+                        procurement workforce is the foundation of transparent, efficient, and ethical public spending.
+                    </p>
+                    <p>
+                        This platform transforms the legal text of the Act into an interactive learning experience — 
+                        combining study, self-assessment, and professional certification in one place.
+                    </p>
+                </div>
+                
+                <!-- Creator Card -->
+                <div class="about-card creator-card" id="creatorCard">
+                    <h2>About the Creator</h2>
+                    <div class="creator-name">Katlo Galenamong</div>
+                    <div class="name-underline" id="nameUnderline"></div>
+                    <div class="creator-title">Educator & Procurement Industry Advocate</div>
+                    <p>
+                        BBA in Logistics and Supply Chain Management at the University of Botswana.
+                    </p>
+                    <div class="creator-quote">
+                        Botswana's procurement landscape is evolving rapidly — and eProcurement is not just an option, 
+                        it is the future. But technology alone is not enough. True progress comes from professionals 
+                        who understand the theory behind the systems they operate. We cannot improve what we do not 
+                        understand. My mission is to build that foundational knowledge across our industry, so that 
+                        Botswana's procurement professionals are not merely trained to follow procedures, but educated 
+                        to lead transformation.
+                    </div>
+                </div>
+                
+                <!-- Features Card -->
+                <div class="about-card features-card" id="featuresCard">
+                    <h2>What This Platform Offers</h2>
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <span class="feature-icon">📖</span>
+                            <div class="feature-text">
+                                <strong>Full Act Text</strong><br>
+                                <span>The complete Public Procurement Act, 2021 — searchable, navigable by Part and Section.</span>
+                            </div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">📝</span>
+                            <div class="feature-text">
+                                <strong>Competency Tests</strong><br>
+                                <span>Chapter-by-chapter assessments with challenging questions, real-world scenarios, and detailed explanations.</span>
+                            </div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">📊</span>
+                            <div class="feature-text">
+                                <strong>Progress Dashboard</strong><br>
+                                <span>Track your mastery across all 16 Parts of the Act with visual progress indicators.</span>
+                            </div>
+                        </li>
+                        <li class="feature-item">
+                            <span class="feature-icon">🏆</span>
+                            <div class="feature-text">
+                                <strong>Printable Certificate</strong><br>
+                                <span>Earn a Certificate of Competency to showcase your expertise on your CV and professional profiles.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Disclaimer Card -->
+                <div class="about-card disclaimer-card" id="disclaimerCard">
+                    <h2>Disclaimer</h2>
+                    <p>
+                        This is an independent study tool developed for educational purposes. While every effort has been 
+                        made to ensure accuracy, always refer to the official Government Gazette and the Public Procurement 
+                        Regulatory Authority (PPRA) for the authoritative version of the Public Procurement Act, 2021.
+                    </p>
+                </div>
+                
+                <!-- Connect Card -->
+                <div class="about-card connect-card" id="connectCard">
+                    <h2>Connect</h2>
+                    <p>Interested in procurement education, collaboration, or just want to connect?</p>
+                    <a href="https://www.linkedin.com/in/kind-katlo-0227b3268" target="_blank" class="linkedin-btn">
+                        🔗 Connect on LinkedIn
+                    </a>
+                    <br>
+                    <a href="index.html" class="back-link">← Back to Dashboard</a>
+                </div>
+                
+            </div>
+        </main>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="footer">
+            <p>Built for procurement professionals in Botswana</p>
+            <p>
+                <a href="about.html" class="footer-link">About</a> · 
+                <a href="https://ppra.co.bw" target="_blank" class="footer-link">Official PPRA Website</a> · 
+                <a href="#" class="footer-link">Act No. 24 of 2021</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // ===== ANIMATIONS =====
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // 1. Mission card slides in from left
+            anime({
+                targets: '#missionCard',
+                opacity: [0, 1],
+                translateX: [-40, 0],
+                duration: 600,
+                delay: 200,
+                easing: 'easeOutQuad'
+            });
+            
+            // 2. Creator card slides in from right
+            anime({
+                targets: '#creatorCard',
+                opacity: [0, 1],
+                translateX: [40, 0],
+                duration: 600,
+                delay: 400,
+                easing: 'easeOutQuad',
+                complete: function() {
+                    // Name underline draws across
+                    anime({
+                        targets: '#nameUnderline',
+                        width: ['0', '100%'],
+                        duration: 800,
+                        easing: 'easeInOutQuad'
+                    });
+                }
+            });
+            
+            // 3. Features card fades up with slight scale
+            anime({
+                targets: '#featuresCard',
+                opacity: [0, 1],
+                translateY: [30, 0],
+                duration: 600,
+                delay: 700,
+                easing: 'easeOutQuad'
+            });
+            
+            // 4. Disclaimer card fades in
+            anime({
+                targets: '#disclaimerCard',
+                opacity: [0, 1],
+                translateY: [20, 0],
+                duration: 500,
+                delay: 900,
+                easing: 'easeOutQuad'
+            });
+            
+            // 5. Connect card fades in
+            anime({
+                targets: '#connectCard',
+                opacity: [0, 1],
+                translateY: [20, 0],
+                duration: 500,
+                delay: 1100,
+                easing: 'easeOutQuad'
+            });
+            
+        });
+    </script>
+</body>
+</html>
